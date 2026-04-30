@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio Data Maker - Create Beautiful Marriage Biodata</title>
+    <meta name="description"
+        content="Create stunning marriage biodata with beautiful templates. Choose from traditional, floral, and modern designs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Noto+Serif:wght@400;700&family=Cormorant+Garamond:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app">
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">📋</span>
+                    <h1>Bio Data Maker</h1>
+                </div>
+                <p class="tagline">Create Beautiful Marriage Biodata in Minutes</p>
+            </div>
+        </header>
+        <main class="main-content">
+            <aside class="form-panel" id="formPanel">
+                <div class="panel-header">
+                    <h2>Fill Your Details</h2>
+                    <button class="btn-toggle-preview" id="btnTogglePreview" title="Toggle Preview">👁️ Preview</button>
+                </div>
+                <section class="form-section profiles-section"
+                    style="background: rgba(26, 122, 109, 0.05); border: 1px dashed rgba(26, 122, 109, 0.4); padding: 15px; border-radius: 8px; margin-top: -10px; margin-bottom: 20px;">
+                    <h3 class="section-title"
+                        style="margin-bottom: 10px; border: none; font-size: 14px; color: #1a7a6d;">Load Demo Profile
+                    </h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px;">
+                        <button class="btn btn-secondary" onclick="app.loadProfile('default')"
+                            style="padding: 6px; font-size: 12px;">👧 Namita</button>
+                        <button class="btn btn-secondary" onclick="app.loadProfile('raj')"
+                            style="padding: 6px; font-size: 12px; background: #e3f2fd; color: #1565c0; border-color: #bbdefb;">👦
+                            Raj</button>
+                        <button class="btn btn-secondary" onclick="app.loadProfile('blank')"
+                            style="padding: 6px; font-size: 12px; border-style: dashed;">📄 Blank</button>
+                        <button class="btn btn-secondary" onclick="document.getElementById('jsonInput').click()"
+                            style="padding: 6px; font-size: 12px; border-style: dashed; background: #e8f5e9; color: #2e7d32; border-color: #a5d6a7;">JSON</button>
+                        <input type="file" id="jsonInput" accept=".json" style="display:none;"
+                            onchange="app.loadFromJson(event)">
+                    </div>
+                </section>
+                <section class="form-section">
+                    <h3 class="section-title">Choose Template</h3>
+                    <div class="template-grid" id="templateGrid">
+                        <div class="template-card active" data-template="1">
+                            <div class="template-mini template-mini-1">
+                                <div class="mini-header" style="color:#1a7a6d;">|| गणेशाय नमः ||</div>
+                                <div class="mini-lines"></div>
+                            </div>
+                            <span>Traditional</span>
+                        </div>
+                        <div class="template-card" data-template="2">
+                            <div class="template-mini template-mini-2">
+                                <div class="mini-header" style="color:#c07830;">Personal Details</div>
+                                <div class="mini-lines"></div>
+                            </div>
+                            <span>Floral Pink</span>
+                        </div>
+                        <div class="template-card" data-template="3">
+                            <div class="template-mini template-mini-3">
+                                <div class="mini-header" style="color:#b8860b;">BIODATA</div>
+                                <div class="mini-lines"></div>
+                            </div>
+                            <span>Gold Classic</span>
+                        </div>
+                        <div class="template-card" data-template="4">
+                            <div class="template-mini template-mini-4">
+                                <div class="mini-header" style="color:#b8860b;">BIODATA</div>
+                                <div class="mini-lines"></div>
+                            </div>
+                            <span>Gold Minimal</span>
+                        </div>
+                        <div class="template-card" data-template="5">
+                            <div class="template-mini template-mini-5">
+                                <div class="mini-header" style="color:#6b5b3e;">BIODATA</div>
+                                <div class="mini-lines"></div>
+                            </div>
+                            <span>Art Deco</span>
+                        </div>
+                        <div class="template-card" data-template="6">
+                            <div class="template-mini template-mini-6">
+                                <div class="mini-header"
+                                    style="color:#800000;border-bottom:1px solid #800000;display:inline-block;">BIODATA
+                                </div>
+                                <div class="mini-lines"></div>
+                            </div>
+                            <span>Royal Maroon</span>
+                        </div>
+                        <div class="template-card" data-template="7">
+                            <div class="template-mini template-mini-7">
+                                <div style="height:12px;width:100%;background:#005a80;border-radius:0 0 10px 10px;">
+                                </div>
+                                <div class="mini-lines" style="margin-top:6px;"></div>
+                            </div>
+                            <span>Peacock Blue</span>
+                        </div>
+                        <div class="template-card" data-template="8">
+                            <div class="template-mini template-mini-8">
+                                <div class="mini-header" style="color:#6b4c9a;">BIODATA</div>
+                                <div class="mini-lines"></div>
+                            </div>
+                            <span>Elegant Lavender</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <h3 class="section-title">Top Icon Decoration</h3>
+                    <div class="top-icon-options">
+                        <label class="icon-option-lbl"><input type="radio" name="topIcon" value="default" checked>
+                            <span>Default SVG</span></label>
+                        <label class="icon-option-lbl"><input type="radio" name="topIcon" value="icon1"> <img
+                                src="icon1.png" class="icon-option-img" alt="Ganesha 1"> <span>Style 1</span></label>
+                        <label class="icon-option-lbl"><input type="radio" name="topIcon" value="icon2"> <img
+                                src="icon2.png" class="icon-option-img" alt="Ganesha 2"> <span>Style 2</span></label>
+                        <label class="icon-option-lbl"><input type="radio" name="topIcon" value="none">
+                            <span>None</span></label>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <h3 class="section-title">Upload Photo</h3>
+                    <div class="photo-upload-area" id="photoUploadArea">
+                        <input type="file" id="photoInput" accept="image/*" hidden>
+                        <div class="upload-placeholder" id="uploadPlaceholder"><span
+                                class="upload-icon">📷</span><span>Click to upload photo</span></div>
+                        <img id="photoPreviewImg" class="photo-preview-img" alt="Uploaded photo" style="display:none;">
+                        <button id="removePhoto" class="btn-remove-photo" style="display:none;">✕</button>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <div class="section-title-row">
+                        <h3 class="section-title" style="margin-bottom:0;border:none;">Personal Details</h3>
+                    </div>
+                    <div class="form-fields-container" id="personalFieldsContainer">
+                        <!-- Fields injected here -->
+                    </div>
+                    <button class="btn-add-field" onclick="app.addField('personal')"><span>+</span> Add Custom
+                        Field</button>
+                </section>
+
+                <section class="form-section">
+                    <div class="section-title-row">
+                        <h3 class="section-title" style="margin-bottom:0;border:none;">Family Details</h3>
+                    </div>
+                    <div class="form-fields-container" id="familyFieldsContainer">
+                        <!-- Fields injected here -->
+                    </div>
+                    <button class="btn-add-field" onclick="app.addField('family')"><span>+</span> Add Custom
+                        Field</button>
+                </section>
+
+                <section class="form-section">
+                    <div class="section-title-row">
+                        <h3 class="section-title" style="margin-bottom:0;border:none;">Contact Details</h3>
+                    </div>
+                    <div class="form-fields-container" id="contactFieldsContainer">
+                        <!-- Fields injected here -->
+                    </div>
+                    <button class="btn-add-field" onclick="app.addField('contact')"><span>+</span> Add Custom
+                        Field</button>
+                </section>
+
+                <section class="form-actions" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                    <button class="btn btn-secondary" id="btnSaveData" title="Save to Browser"><span>💾</span> Save
+                        Draft</button>
+                    <button class="btn btn-secondary" id="btnLoadData" title="Load from Browser" style="opacity:0.5;"
+                        disabled><span>📂</span> Load Draft</button>
+                    <button class="btn btn-primary" id="btnDownload" style="grid-column:1/-1;"><span>📥</span> Download
+                        as Image</button>
+                    <button class="btn btn-secondary" id="btnPrint" style="grid-column:1/-1;"><span>🖨️</span>
+                        Print</button>
+                </section>
+            </aside>
+            <div class="preview-panel" id="previewPanel">
+                <div class="preview-container" id="previewContainer">
+                    <div class="biodata-page template-1" id="biodataPage"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // ============================================
+        // TEMPLATES - SVG decorations & render functions
+        // ============================================
+
+        // Helper functions
+        function generateSunflower(cx, cy, r, petalColor, centerColor) {
+            var petals = '';
+            var petalCount = 12;
+            for (var i = 0; i < petalCount; i++) {
+                var angle = (i * 360 / petalCount) * Math.PI / 180;
+                var px = cx + Math.cos(angle) * r * 0.9;
+                var py = cy + Math.sin(angle) * r * 0.9;
+                petals += '<ellipse cx="' + px + '" cy="' + py + '" rx="' + (r * 0.35) + '" ry="' + (r * 0.6) + '" transform="rotate(' + (i * 360 / petalCount) + ' ' + px + ' ' + py + ')" fill="' + petalColor + '" opacity="0.85"/>';
+            }
+            return petals + '<circle cx="' + cx + '" cy="' + cy + '" r="' + (r * 0.4) + '" fill="' + centerColor + '"/><circle cx="' + cx + '" cy="' + cy + '" r="' + (r * 0.25) + '" fill="#e8c030"/>';
+        }
+
+        function generateSmallFlower(cx, cy, r, petalColor, centerColor) {
+            var petals = '';
+            for (var i = 0; i < 5; i++) {
+                var angle = (i * 72 - 90) * Math.PI / 180;
+                var px = cx + Math.cos(angle) * r * 0.5;
+                var py = cy + Math.sin(angle) * r * 0.5;
+                petals += '<ellipse cx="' + px + '" cy="' + py + '" rx="' + (r * 0.4) + '" ry="' + (r * 0.65) + '" transform="rotate(' + (i * 72) + ' ' + px + ' ' + py + ')" fill="' + petalColor + '" opacity="0.8"/>';
+            }
+            return petals + '<circle cx="' + cx + '" cy="' + cy + '" r="' + (r * 0.25) + '" fill="' + centerColor + '"/>';
+        }
+
+        // SVG Components
+        var SVG_GANESH = '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ganeshGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#e8a020;stop-opacity:1"/><stop offset="100%" style="stop-color:#d4841a;stop-opacity:1"/></linearGradient></defs><g fill="url(#ganeshGrad)"><ellipse cx="50" cy="38" rx="22" ry="24"/><ellipse cx="50" cy="62" rx="28" ry="22"/><path d="M35 18 Q42 5 50 12 Q58 5 65 18 Q58 14 50 16 Q42 14 35 18Z"/><path d="M50 50 Q45 62 40 72 Q38 76 42 76 Q46 74 48 68 Q50 62 50 50Z"/><ellipse cx="28" cy="35" rx="10" ry="14" opacity="0.8"/><ellipse cx="72" cy="35" rx="10" ry="14" opacity="0.8"/><circle cx="42" cy="35" r="2.5" fill="#fff"/><circle cx="58" cy="35" r="2.5" fill="#fff"/><circle cx="42" cy="35" r="1.2" fill="#333"/><circle cx="58" cy="35" r="1.2" fill="#333"/><circle cx="50" cy="28" r="2" fill="#e63946"/></g></svg>';
+        var SVG_T1_CORNER = '<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#1a7a6d" stroke-width="1.5"><path d="M5 5 L5 55 Q5 65 15 65"/><path d="M5 5 L55 5 Q65 5 65 15"/><path d="M10 10 L10 45 Q10 52 17 52"/><path d="M10 10 L45 10 Q52 10 52 17"/><path d="M15 5 C18 20, 5 18, 5 15" stroke-width="1" opacity="0.6"/><path d="M5 20 Q15 20 20 30" stroke-width="1" opacity="0.5"/><circle cx="8" cy="8" r="3" fill="#1a7a6d" opacity="0.3"/><path d="M65 15 Q72 15 75 22" stroke-width="1"/><path d="M15 65 Q15 72 22 75" stroke-width="1"/></g><circle cx="20" cy="20" r="1.5" fill="#c8a020" opacity="0.7"/><circle cx="5" cy="40" r="1" fill="#c8a020" opacity="0.5"/><circle cx="40" cy="5" r="1" fill="#c8a020" opacity="0.5"/></svg>';
+        var SVG_T2_FLORAL = '<svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><g><g transform="translate(35,35)">' + generateSunflower(0, 0, 20, '#e8763a', '#d45a20') + '</g><g transform="translate(85,25)">' + generateSmallFlower(0, 0, 8, '#e8a0b0', '#d4607a') + '</g><g transform="translate(25,90)">' + generateSmallFlower(0, 0, 10, '#f0a0c0', '#e87090') + '</g><path d="M55 55 Q70 70 90 80 Q75 65 55 55Z" fill="#3a8a30" opacity="0.6"/><path d="M30 60 Q20 80 10 110 Q25 85 30 60Z" fill="#4a7a20" opacity="0.5"/><path d="M60 30 Q80 20 110 10 Q85 25 60 30Z" fill="#5a9a30" opacity="0.4"/><path d="M55 55 Q40 75 15 120" fill="none" stroke="#3a7a25" stroke-width="1.5" opacity="0.5"/><path d="M55 55 Q75 40 120 15" fill="none" stroke="#3a7a25" stroke-width="1.5" opacity="0.5"/><path d="M100 60 Q102 55 105 58 Q108 55 110 60 Q105 68 100 60Z" fill="#e87090" opacity="0.5"/><path d="M60 100 Q62 95 65 98 Q68 95 70 100 Q65 108 60 100Z" fill="#e87090" opacity="0.5"/><circle cx="75" cy="45" r="2" fill="#e8c030" opacity="0.6"/><circle cx="45" cy="75" r="2" fill="#e8c030" opacity="0.6"/><circle cx="100" cy="90" r="1.5" fill="#c07830" opacity="0.4"/><circle cx="90" cy="100" r="1.5" fill="#c07830" opacity="0.4"/></g></svg>';
+        var SVG_T2_SIDE = '<svg viewBox="0 0 30 200" xmlns="http://www.w3.org/2000/svg"><g><path d="M15 20 Q5 50 10 80 Q20 110 10 140 Q5 170 15 190" fill="none" stroke="#3a7a25" stroke-width="1.5" opacity="0.4"/>' + generateSmallFlower(15, 40, 6, '#e8a0b0', '#d4607a') + generateSmallFlower(10, 100, 5, '#f0c050', '#e8a030') + generateSmallFlower(18, 160, 6, '#e87090', '#d45070') + '<path d="M10 60 Q3 55 8 50" fill="#4a8a20" opacity="0.3"/><path d="M15 120 Q8 115 12 110" fill="#4a8a20" opacity="0.3"/></g></svg>';
+        var SVG_GOLD_DIAMOND = '<svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="16" height="16" transform="rotate(45 14 14)" fill="none" stroke="#b8860b" stroke-width="2"/><rect x="9" y="9" width="10" height="10" transform="rotate(45 14 14)" fill="#b8860b" opacity="0.3"/></svg>';
+        var SVG_GOLD_SCROLL = '<svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#b8860b" stroke-width="1.5"><path d="M3 3 L3 50"/><path d="M3 3 L50 3"/><path d="M8 8 L8 40"/><path d="M8 8 L40 8"/><path d="M3 50 Q3 55 8 55 Q13 55 13 50" stroke-width="1.2"/><path d="M50 3 Q55 3 55 8 Q55 13 50 13" stroke-width="1.2"/><path d="M13 40 Q13 45 18 45" stroke-width="1" opacity="0.7"/><path d="M40 13 Q45 13 45 18" stroke-width="1" opacity="0.7"/><rect x="3" y="3" width="6" height="6" transform="rotate(45 6 6)" fill="#b8860b" opacity="0.15" stroke="none"/></g></svg>';
+        var SVG_DECO_CORNER = '<svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg"><g fill="#6b5b3e"><polygon points="0,0 50,0 0,50" opacity="0.15"/><rect x="0" y="0" width="55" height="3"/><rect x="0" y="0" width="3" height="55"/><rect x="0" y="7" width="45" height="2" opacity="0.7"/><rect x="7" y="0" width="2" height="45" opacity="0.7"/><rect x="0" y="12" width="35" height="1.5" opacity="0.5"/><rect x="12" y="0" width="1.5" height="35" opacity="0.5"/><rect x="3" y="3" width="8" height="8" opacity="0.4"/><rect x="5" y="5" width="4" height="4" opacity="0.6"/><rect x="25" y="2" width="5" height="5" transform="rotate(45 27.5 4.5)" opacity="0.3"/><rect x="2" y="25" width="5" height="5" transform="rotate(45 4.5 27.5)" opacity="0.3"/></g></svg>';
+        var SVG_DECO_TOP = '<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg"><g fill="#6b5b3e"><rect x="42" y="5" width="16" height="16" transform="rotate(45 50 13)" opacity="0.3"/><rect x="44" y="7" width="12" height="12" transform="rotate(45 50 13)" opacity="0.5"/><rect x="46" y="9" width="8" height="8" transform="rotate(45 50 13)" opacity="0.7"/><rect x="15" y="12" width="25" height="2" opacity="0.5"/><rect x="60" y="12" width="25" height="2" opacity="0.5"/><rect x="20" y="18" width="60" height="1" opacity="0.3"/><rect x="10" y="9" width="6" height="6" transform="rotate(45 13 12)" opacity="0.3"/><rect x="84" y="9" width="6" height="6" transform="rotate(45 87 12)" opacity="0.3"/><path d="M40 25 L50 35 L60 25" fill="none" stroke="#6b5b3e" stroke-width="2" opacity="0.4"/><path d="M43 28 L50 32 L57 28" fill="none" stroke="#6b5b3e" stroke-width="1.5" opacity="0.3"/></g></svg>';
+        var SVG_DECO_BOTTOM = '<svg viewBox="0 0 80 45" xmlns="http://www.w3.org/2000/svg"><g fill="#6b5b3e"><path d="M30 20 L40 10 L50 20 L40 30 Z" opacity="0.4"/><path d="M33 20 L40 13 L47 20 L40 27 Z" opacity="0.6"/><rect x="10" y="19" width="18" height="2" opacity="0.4"/><rect x="52" y="19" width="18" height="2" opacity="0.4"/><path d="M35 35 L40 40 L45 35" fill="none" stroke="#6b5b3e" stroke-width="1.5" opacity="0.3"/></g></svg>';
+        var SVG_PERSON = '<svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="30" r="22" fill="#b8860b" opacity="0.6"/><ellipse cx="40" cy="85" rx="30" ry="20" fill="#b8860b" opacity="0.5"/></svg>';
+        var SVG_MAROON_CORNER = '<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="#800000"><path d="M0,0 L60,0 L60,5 L5,5 L5,60 L0,60 Z"/><circle cx="15" cy="15" r="4"/><circle cx="25" cy="15" r="3" opacity="0.7"/><circle cx="15" cy="25" r="3" opacity="0.7"/><path d="M10,10 L35,10" stroke="#800000" stroke-width="1.5"/><path d="M10,10 L10,35" stroke="#800000" stroke-width="1.5"/></g></svg>';
+
+        // Field helpers (dynamic generator)
+        function generateFieldsHTML(fields, prefix) {
+            return fields.map(function (f) {
+                if (!f.value && !f.label) return '';
+                return '<div class="' + prefix + '-field-row"><span class="' + prefix + '-field-label">' + f.label + '</span><span class="' + prefix + '-field-colon">:</span><span class="' + prefix + '-field-value">' + f.value + '</span></div>';
+            }).join('');
+        }
+
+        function getTopIconHTML(defaultSVG, topIconType) {
+            if (topIconType === 'none') return '';
+            if (topIconType === 'icon1') return '<img src="icon1.png" style="height:55px;width:auto;display:block;margin:0 auto;">';
+            if (topIconType === 'icon2') return '<img src="icon2.png" style="height:55px;width:auto;display:block;margin:0 auto;">';
+            return defaultSVG || '';
+        }
+
+        // Template renderers
+        function renderTemplate1(d) {
+            var iconHTML = getTopIconHTML(SVG_GANESH, d.topIcon);
+            var personalContent = d.photo
+                ? '<div class="t1-personal-section"><div class="t1-details-left">' + generateFieldsHTML(d.personal.slice(0, 8), 't1') + '</div><div class="t1-photo-right"><img src="' + d.photo + '" alt="Photo"></div></div>' + generateFieldsHTML(d.personal.slice(8), 't1')
+                : generateFieldsHTML(d.personal, 't1');
+
+            return '<div class="t1-border-outer"></div><div class="t1-border-frame"></div>'
+                + '<div class="t1-corner t1-corner-tl">' + SVG_T1_CORNER + '</div>'
+                + '<div class="t1-corner t1-corner-tr">' + SVG_T1_CORNER + '</div>'
+                + '<div class="t1-corner t1-corner-bl">' + SVG_T1_CORNER + '</div>'
+                + '<div class="t1-corner t1-corner-br">' + SVG_T1_CORNER + '</div>'
+                + '<div class="t1-content">'
+                + (iconHTML ? '<div class="t1-ganesh-icon" style="margin-bottom:12px;">' + iconHTML + '</div>' : '')
+                + '<div class="t1-header-text"><h2>|| SHREE GANESHAYA NAMAH ||</h2></div>'
+                + personalContent
+                + '<div class="t1-section-heading">FAMILY DETAILS</div>'
+                + generateFieldsHTML(d.family, 't1')
+                + '<div class="t1-section-heading">CONTACT DETAILS</div>'
+                + generateFieldsHTML(d.contact, 't1')
+                + '</div>';
+        }
+
+        function renderTemplate2(d) {
+            var iconHTML = getTopIconHTML('', d.topIcon);
+            var photoHTML = d.photo ? '<div class="t2-photo-top"><img src="' + d.photo + '" alt="Photo"></div>' : '';
+            return '<div class="t2-floral-corner t2-floral-tl">' + SVG_T2_FLORAL + '</div>'
+                + '<div class="t2-floral-corner t2-floral-tr">' + SVG_T2_FLORAL + '</div>'
+                + '<div class="t2-floral-corner t2-floral-bl">' + SVG_T2_FLORAL + '</div>'
+                + '<div class="t2-floral-corner t2-floral-br">' + SVG_T2_FLORAL + '</div>'
+                + '<div class="t2-side-left">' + SVG_T2_SIDE + '</div>'
+                + '<div class="t2-side-right">' + SVG_T2_SIDE + '</div>'
+                + '<div class="t2-content">'
+                + (iconHTML ? '<div style="text-align:center;margin-bottom:-10px;position:relative;z-index:2;">' + iconHTML + '</div>' : '')
+                + photoHTML
+                + '<div class="t2-section-heading" ' + (!photoHTML && !iconHTML ? 'style="margin-top:0"' : '') + '>PERSONAL DETAILS</div>'
+                + generateFieldsHTML(d.personal, 't2')
+                + '<div class="t2-section-heading">FAMILY DETAILS</div>'
+                + generateFieldsHTML(d.family, 't2')
+                + '<div class="t2-section-heading">CONTACT DETAILS</div>'
+                + generateFieldsHTML(d.contact, 't2')
+                + '</div>';
+        }
+
+        function renderTemplate3(d) {
+            var iconHTML = getTopIconHTML('', d.topIcon);
+            var personalContent = d.photo
+                ? '<div class="t3-personal-section"><div class="t3-details-left">' + generateFieldsHTML(d.personal.slice(0, 6), 't3') + '</div><div class="t3-photo-right"><img src="' + d.photo + '" alt="Photo"></div></div>' + generateFieldsHTML(d.personal.slice(6), 't3')
+                : generateFieldsHTML(d.personal, 't3');
+            return '<div class="t3-border-frame"></div><div class="t3-border-inner"></div>'
+                + '<div class="t3-diamond t3-diamond-tl">' + SVG_GOLD_DIAMOND + '</div>'
+                + '<div class="t3-diamond t3-diamond-tr">' + SVG_GOLD_DIAMOND + '</div>'
+                + '<div class="t3-diamond t3-diamond-bl">' + SVG_GOLD_DIAMOND + '</div>'
+                + '<div class="t3-diamond t3-diamond-br">' + SVG_GOLD_DIAMOND + '</div>'
+                + '<div class="t3-scroll t3-scroll-tl">' + SVG_GOLD_SCROLL + '</div>'
+                + '<div class="t3-scroll t3-scroll-tr">' + SVG_GOLD_SCROLL + '</div>'
+                + '<div class="t3-scroll t3-scroll-bl">' + SVG_GOLD_SCROLL + '</div>'
+                + '<div class="t3-scroll t3-scroll-br">' + SVG_GOLD_SCROLL + '</div>'
+                + '<div class="t3-content">'
+                + (iconHTML ? '<div style="text-align:center;margin-bottom:10px;">' + iconHTML + '</div>' : '')
+                + '<div class="t3-header"><h3>PERSONAL INFORMATION</h3></div>'
+                + personalContent
+                + '<div class="t3-section-heading">FAMILY INFORMATION</div>'
+                + generateFieldsHTML(d.family, 't3')
+                + generateFieldsHTML(d.contact, 't3')
+                + '</div>';
+        }
+
+        function renderTemplate4(d) {
+            var iconHTML = getTopIconHTML('', d.topIcon);
+            return '<div class="t4-border-frame"></div><div class="t4-border-inner"></div>'
+                + '<div class="t4-diamond t4-diamond-tl">' + SVG_GOLD_DIAMOND + '</div>'
+                + '<div class="t4-diamond t4-diamond-tr">' + SVG_GOLD_DIAMOND + '</div>'
+                + '<div class="t4-diamond t4-diamond-bl">' + SVG_GOLD_DIAMOND + '</div>'
+                + '<div class="t4-diamond t4-diamond-br">' + SVG_GOLD_DIAMOND + '</div>'
+                + '<div class="t4-scroll t4-scroll-tl">' + SVG_GOLD_SCROLL + '</div>'
+                + '<div class="t4-scroll t4-scroll-tr">' + SVG_GOLD_SCROLL + '</div>'
+                + '<div class="t4-scroll t4-scroll-bl">' + SVG_GOLD_SCROLL + '</div>'
+                + '<div class="t4-scroll t4-scroll-br">' + SVG_GOLD_SCROLL + '</div>'
+                + '<div class="t4-content">'
+                + (iconHTML ? '<div style="text-align:center;margin-bottom:10px;">' + iconHTML + '</div>' : '')
+                + '<div class="t4-header"><h3>PERSONAL INFORMATION</h3></div>'
+                + generateFieldsHTML(d.personal, 't4')
+                + '<div class="t4-section-heading">FAMILY INFORMATION</div>'
+                + generateFieldsHTML(d.family, 't4')
+                + generateFieldsHTML(d.contact, 't4')
+                + '</div>';
+        }
+
+        function renderTemplate5(d) {
+            var iconHTML = getTopIconHTML(SVG_DECO_TOP, d.topIcon);
+            return '<div class="t5-border-frame"></div><div class="t5-border-inner"></div>'
+                + '<div class="t5-deco-corner t5-deco-tl">' + SVG_DECO_CORNER + '</div>'
+                + '<div class="t5-deco-corner t5-deco-tr">' + SVG_DECO_CORNER + '</div>'
+                + '<div class="t5-deco-corner t5-deco-bl">' + SVG_DECO_CORNER + '</div>'
+                + '<div class="t5-deco-corner t5-deco-br">' + SVG_DECO_CORNER + '</div>'
+                + '<div class="t5-content">'
+                + (iconHTML ? '<div class="t5-top-ornament" style="margin-bottom:10px;">' + iconHTML + '</div>' : '')
+                + '<div class="t5-header"><h3>PERSONAL INFORMATION</h3></div>'
+                + generateFieldsHTML(d.personal, 't5')
+                + '<div class="t5-section-heading">FAMILY INFORMATION</div>'
+                + generateFieldsHTML(d.family, 't5')
+                + generateFieldsHTML(d.contact, 't5')
+                + '<div class="t5-bottom-ornament">' + SVG_DECO_BOTTOM + '</div>'
+                + '</div>';
+        }
+
+        function renderTemplate6(d) {
+            var iconHTML = getTopIconHTML('', d.topIcon);
+            var personalContent = d.photo
+                ? '<div class="t6-personal-section"><div style="flex:1">' + generateFieldsHTML(d.personal.slice(0, 7), 't6') + '</div><div class="t6-photo-right"><img src="' + d.photo + '" alt="Photo"></div></div>' + generateFieldsHTML(d.personal.slice(7), 't6')
+                : generateFieldsHTML(d.personal, 't6');
+            return '<div class="t6-border-frame"></div>'
+                + '<div class="t6-corner t6-corner-tl">' + SVG_MAROON_CORNER + '</div>'
+                + '<div class="t6-corner t6-corner-tr">' + SVG_MAROON_CORNER + '</div>'
+                + '<div class="t6-corner t6-corner-bl">' + SVG_MAROON_CORNER + '</div>'
+                + '<div class="t6-corner t6-corner-br">' + SVG_MAROON_CORNER + '</div>'
+                + '<div class="t6-content">'
+                + (iconHTML ? '<div style="text-align:center;margin-bottom:15px;">' + iconHTML + '</div>' : '')
+                + personalContent
+                + '<div class="t6-section-heading">Family & Contact Details</div>'
+                + generateFieldsHTML(d.family, 't6')
+                + generateFieldsHTML(d.contact, 't6')
+                + '</div>';
+        }
+
+        function renderTemplate7(d) {
+            var photoHTML = d.photo ? '<div class="t7-photo"><img src="' + d.photo + '" alt="Photo"></div>' : '';
+            var iconHTML = getTopIconHTML('', d.topIcon);
+            return '<div class="t7-header-bg"></div>'
+                + '<div class="t7-content">'
+                + (iconHTML ? '<div style="text-align:center;margin-bottom:10px;">' + iconHTML + '</div>' : '')
+                + '<div class="t7-header" style="' + (iconHTML ? '' : 'height:10px;') + '"></div>'
+                + photoHTML
+                + '<div class="t7-section-heading" ' + (!photoHTML && !iconHTML ? 'style="margin-top:0"' : '') + '>Personal Details</div>'
+                + generateFieldsHTML(d.personal, 't7')
+                + '<div class="t7-section-heading">Family Information</div>'
+                + generateFieldsHTML(d.family, 't7')
+                + '<div class="t7-section-heading">Contact Information</div>'
+                + generateFieldsHTML(d.contact, 't7')
+                + '</div>';
+        }
+
+        function renderTemplate8(d) {
+            var photoHTML = d.photo ? '<div class="t8-photo-right"><img src="' + d.photo + '" alt="Photo"></div>' : '';
+            var iconHTML = getTopIconHTML('', d.topIcon);
+            return '<div class="t8-content">'
+                + (iconHTML ? '<div style="text-align:center;margin-bottom:15px;">' + iconHTML + '</div>' : '')
+                + photoHTML
+                + generateFieldsHTML(d.personal, 't8')
+                + '<div class="t8-section-heading">Family Information</div>'
+                + generateFieldsHTML(d.family, 't8')
+                + '<div class="t8-section-heading">Contact Details</div>'
+                + generateFieldsHTML(d.contact, 't8')
+                + '</div>';
+        }
+
+        var RENDERERS = {
+            1: renderTemplate1, 2: renderTemplate2, 3: renderTemplate3, 4: renderTemplate4,
+            5: renderTemplate5, 6: renderTemplate6, 7: renderTemplate7, 8: renderTemplate8
+        };
+        var TCLASSES = {
+            1: 'template-1', 2: 'template-2', 3: 'template-3', 4: 'template-4',
+            5: 'template-5', 6: 'template-6', 7: 'template-7', 8: 'template-8'
+        };
+
+        // ============================================
+        // APP LOGIC & STATE MANAGEMENT
+        // ============================================
+        const app = (function () {
+            var state = {
+                template: 1,
+                topIcon: 'default',
+                photoDataUrl: null,
+                fields: {
+                    personal: [],
+                    family: [],
+                    contact: []
+                }
+            };
+
+            // Profiles Dictionary
+            var predefinedProfiles = {
+                'default': {
+                    personal: [
+                        { id: 'p1', label: 'Full Name', value: 'Namita Kumar' },
+                        { id: 'p2', label: 'Date of Birth', value: '13/09/1999' },
+                        { id: 'p3', label: 'Time of Birth', value: '09:27 AM' },
+                        { id: 'p4', label: 'Place of Birth', value: 'Delhi' },
+                        { id: 'p5', label: 'Rashi', value: 'Leo (Sinh)' },
+                        { id: 'p6', label: 'Manglik', value: 'No' },
+                        { id: 'p7', label: 'Religion', value: 'Hindu' },
+                        { id: 'p8', label: 'Caste', value: 'Brahmin' },
+                        { id: 'p9', label: 'Height', value: '5 ft. 3 in.' },
+                        { id: 'p10', label: 'Weight', value: '71 KG' },
+                        { id: 'p11', label: 'Blood Group', value: 'AB+' },
+                        { id: 'p12', label: 'Complexion', value: 'Fair' },
+                        { id: 'p13', label: 'Education', value: 'MBA' },
+                        { id: 'p14', label: 'Occupation', value: 'Software Engineer' }
+                    ],
+                    family: [
+                        { id: 'f1', label: "Father's Name", value: 'Arjun Kumar' },
+                        { id: 'f2', label: 'Father Occupation', value: 'Business' },
+                        { id: 'f3', label: "Mother's Name", value: 'Jaya Kumar' },
+                        { id: 'f4', label: 'Mother Occupation', value: 'Housewife' },
+                        { id: 'f5', label: 'Siblings', value: '1 Brother, 1 Sister' }
+                    ],
+                    contact: [
+                        { id: 'c1', label: 'Address', value: 'Flat No. 71, Akshaya Apartment, Agra' },
+                        { id: 'c2', label: 'Contact No.', value: '9662XXXXX7' },
+                        { id: 'c3', label: 'Email', value: 'name@example.com' }
+                    ]
+                },
+                'blank': {
+                    personal: [
+                        { id: 'p1', label: 'Full Name', value: '' },
+                        { id: 'p2', label: 'Date of Birth', value: '' },
+                        { id: 'p3', label: 'Height', value: '' },
+                        { id: 'p4', label: 'Education', value: '' },
+                        { id: 'p5', label: 'Occupation', value: '' }
+                    ],
+                    family: [
+                        { id: 'f1', label: "Father's Name", value: '' },
+                        { id: 'f2', label: "Mother's Name", value: '' }
+                    ],
+                    contact: [
+                        { id: 'c1', label: 'Contact No.', value: '' }
+                    ]
+                }
+            };
+
+            // Initialize state with default fields
+            function resetToDefaults() {
+                var data = predefinedProfiles['default'];
+                state.fields.personal = JSON.parse(JSON.stringify(data.personal));
+                state.fields.family = JSON.parse(JSON.stringify(data.family));
+                state.fields.contact = JSON.parse(JSON.stringify(data.contact));
+            }
+
+            // --- Render UI ---
+            function renderFieldRows(section) {
+                var container = document.getElementById(section + 'FieldsContainer');
+                if (!container) return;
+
+                var html = '';
+                state.fields[section].forEach(function (f, index) {
+                    html += '<div class="dynamic-field-row" data-id="' + f.id + '" data-section="' + section + '" draggable="true">'
+                        + '<div class="field-drag-handle">☰</div>'
+                        + '<div class="field-inputs">'
+                        + '<input type="text" class="field-label-input" placeholder="Label" value="' + f.label + '" oninput="app.updateField(\'' + section + '\',\'' + f.id + '\',\'label\',this.value)">'
+                        + '<input type="text" class="field-value-input" placeholder="Value" value="' + f.value + '" oninput="app.updateField(\'' + section + '\',\'' + f.id + '\',\'value\',this.value)">'
+                        + '</div>'
+                        + '<div class="field-move-btns">'
+                        + '<button class="field-move-btn" onclick="app.moveField(\'' + section + '\',\'' + f.id + '\',-1)" ' + (index === 0 ? 'disabled' : '') + '>▲</button>'
+                        + '<button class="field-move-btn" onclick="app.moveField(\'' + section + '\',\'' + f.id + '\',1)" ' + (index === state.fields[section].length - 1 ? 'disabled' : '') + '>▼</button>'
+                        + '</div>'
+                        + '<button class="field-delete-btn" onclick="app.removeField(\'' + section + '\',\'' + f.id + '\')">✕</button>'
+                        + '</div>';
+                });
+                container.innerHTML = html;
+                setupDragAndDrop(container, section);
+            }
+
+            function renderAllFields() {
+                renderFieldRows('personal');
+                renderFieldRows('family');
+                renderFieldRows('contact');
+            }
+
+            function renderPreview() {
+                var page = document.getElementById('biodataPage');
+                if (!page) return;
+                var payload = {
+                    topIcon: state.topIcon,
+                    photo: state.photoDataUrl,
+                    personal: state.fields.personal,
+                    family: state.fields.family,
+                    contact: state.fields.contact
+                };
+                page.className = 'biodata-page ' + TCLASSES[state.template];
+                if (RENDERERS[state.template]) {
+                    page.innerHTML = RENDERERS[state.template](payload);
+                }
+            }
+
+            // --- Drag and drop logic ---
+            var draggedElement = null;
+            function setupDragAndDrop(container, section) {
+                var rows = container.querySelectorAll('.dynamic-field-row');
+                rows.forEach(function (row) {
+                    row.addEventListener('dragstart', function (e) {
+                        draggedElement = this;
+                        setTimeout(function () { row.classList.add('dragging'); }, 0);
+                        e.dataTransfer.effectAllowed = 'move';
+                    });
+                    row.addEventListener('dragend', function () {
+                        this.classList.remove('dragging');
+                        draggedElement = null;
+                        var newRows = container.querySelectorAll('.dynamic-field-row');
+                        var newOrder = [];
+                        newRows.forEach(function (r) {
+                            var id = r.getAttribute('data-id');
+                            var item = state.fields[section].find(function (x) { return x.id === id; });
+                            if (item) newOrder.push(item);
+                        });
+                        state.fields[section] = newOrder;
+                        renderFieldRows(section);
+                        renderPreview();
+                    });
+                    row.addEventListener('dragover', function (e) {
+                        e.preventDefault();
+                        if (!draggedElement || draggedElement === this) return;
+
+                        var rect = this.getBoundingClientRect();
+                        var offsetY = e.clientY - rect.top;
+                        if (offsetY > rect.height / 2) {
+                            this.parentNode.insertBefore(draggedElement, this.nextSibling);
+                        } else {
+                            this.parentNode.insertBefore(draggedElement, this);
+                        }
+                    });
+                });
+            }
+
+            var debounceTimer;
+            function triggerPreviewDebounced() {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(renderPreview, 150);
+            }
+
+            // --- Exported Actions ---
+            return {
+                init: function () {
+                    resetToDefaults();
+                    renderAllFields();
+                    renderPreview();
+
+                    // Templates list
+                    document.querySelectorAll('.template-card').forEach(function (card) {
+                        card.addEventListener('click', function () {
+                            document.querySelectorAll('.template-card').forEach(function (c) { c.classList.remove('active'); });
+                            this.classList.add('active');
+                            state.template = parseInt(this.getAttribute('data-template'));
+                            renderPreview();
+                        });
+                    });
+
+                    // Top Icon Change
+                    document.querySelectorAll('input[name="topIcon"]').forEach(function (radio) {
+                        radio.addEventListener('change', function (e) {
+                            state.topIcon = e.target.value;
+                            renderPreview();
+                        });
+                    });
+
+                    // Photo upload
+                    document.getElementById('photoUploadArea').addEventListener('click', function (e) {
+                        if (e.target.id !== 'removePhoto') document.getElementById('photoInput').click();
+                    });
+                    document.getElementById('photoInput').addEventListener('change', function (e) {
+                        var f = e.target.files[0];
+                        if (f) {
+                            var r = new FileReader();
+                            r.onload = function (ev) {
+                                state.photoDataUrl = ev.target.result;
+                                document.getElementById('photoPreviewImg').src = state.photoDataUrl;
+                                document.getElementById('photoPreviewImg').style.display = 'block';
+                                document.getElementById('uploadPlaceholder').style.display = 'none';
+                                document.getElementById('removePhoto').style.display = 'flex';
+                                renderPreview();
+                            };
+                            r.readAsDataURL(f);
+                        }
+                    });
+                    document.getElementById('removePhoto').addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        state.photoDataUrl = null;
+                        document.getElementById('photoPreviewImg').style.display = 'none';
+                        document.getElementById('uploadPlaceholder').style.display = 'flex';
+                        this.style.display = 'none';
+                        document.getElementById('photoInput').value = '';
+                        renderPreview();
+                    });
+
+                    // Mobile preview toggle
+                    var showingPreview = false;
+                    document.getElementById('btnTogglePreview').addEventListener('click', function () {
+                        showingPreview = !showingPreview;
+                        var fP = document.getElementById('formPanel');
+                        var pP = document.getElementById('previewPanel');
+                        if (showingPreview) {
+                            fP.style.display = 'none'; pP.style.display = 'flex';
+                            this.style.position = 'fixed'; this.style.bottom = '20px'; this.style.right = '20px'; this.style.zIndex = '999';
+                            this.innerHTML = '✏️ Edit';
+                        } else {
+                            fP.style.display = ''; pP.style.display = '';
+                            this.style.position = ''; this.style.bottom = ''; this.style.right = ''; this.style.zIndex = '';
+                            this.innerHTML = '👁️ Preview';
+                        }
+                    });
+
+                    // PDF / image download
+                    document.getElementById('btnDownload').addEventListener('click', function () {
+                        var btn = this;
+                        btn.disabled = true; btn.innerHTML = '<span>⏳</span> Generating...';
+                        html2canvas(document.getElementById('biodataPage'), { scale: 5, useCORS: true }).then(function (canvas) {
+                            var link = document.createElement('a');
+                            link.download = 'biodata-' + Date.now() + '.png';
+                            link.href = canvas.toDataURL('image/png', 1.0);
+                            link.click();
+                            btn.disabled = false; btn.innerHTML = '<span>📥</span> Download as Image';
+                        });
+                    });
+
+                    document.getElementById('btnPrint').addEventListener('click', function () { window.print(); });
+
+                    // Save and Load from Local Storage
+                    function updateLoadButton() {
+                        var hasData = !!localStorage.getItem('biodata_draft');
+                        var btnLoad = document.getElementById('btnLoadData');
+                        btnLoad.disabled = !hasData;
+                        btnLoad.style.opacity = hasData ? '1' : '0.5';
+                    }
+                    updateLoadButton();
+
+                    document.getElementById('btnSaveData').addEventListener('click', function () {
+                        try {
+                            localStorage.setItem('biodata_draft', JSON.stringify(state));
+                            var btn = this;
+                            var originalText = btn.innerHTML;
+                            btn.innerHTML = '<span>✅</span> Saved!';
+                            btn.style.background = '#e6f4ea';
+                            btn.style.color = '#1a7a6d';
+                            btn.style.borderColor = '#1a7a6d';
+                            updateLoadButton();
+                            setTimeout(function () {
+                                btn.innerHTML = originalText;
+                                btn.style.background = '';
+                                btn.style.color = '';
+                                btn.style.borderColor = '';
+                            }, 2000);
+                        } catch (e) {
+                            alert('Could not save draft. The image might be too large (Browser limit is usually 5MB).');
+                        }
+                    });
+
+                    document.getElementById('btnLoadData').addEventListener('click', function () {
+                        var data = localStorage.getItem('biodata_draft');
+                        if (data) {
+                            try {
+                                state = JSON.parse(data);
+
+                                // Sync UI to loaded state
+                                document.querySelectorAll('.template-card').forEach(function (c) { c.classList.remove('active'); });
+                                var activeCard = document.querySelector('.template-card[data-template="' + state.template + '"]');
+                                if (activeCard) activeCard.classList.add('active');
+
+                                var iconRadio = document.querySelector('input[name="topIcon"][value="' + state.topIcon + '"]');
+                                if (iconRadio) iconRadio.checked = true;
+
+                                if (state.photoDataUrl) {
+                                    document.getElementById('photoPreviewImg').src = state.photoDataUrl;
+                                    document.getElementById('photoPreviewImg').style.display = 'block';
+                                    document.getElementById('uploadPlaceholder').style.display = 'none';
+                                    document.getElementById('removePhoto').style.display = 'flex';
+                                } else {
+                                    document.getElementById('photoPreviewImg').style.display = 'none';
+                                    document.getElementById('uploadPlaceholder').style.display = 'flex';
+                                    document.getElementById('removePhoto').style.display = 'none';
+                                }
+
+                                renderAllFields();
+                                renderPreview();
+                            } catch (e) {
+                                alert('Error loading draft.');
+                            }
+                        }
+                    });
+                },
+
+                // State modifiers
+                updateField: function (section, id, key, value) {
+                    var item = state.fields[section].find(function (f) { return f.id === id; });
+                    if (item) item[key] = value;
+                    triggerPreviewDebounced();
+                },
+                addField: function (section) {
+                    var id = section.charAt(0) + Date.now();
+                    state.fields[section].push({ id: id, label: '', value: '' });
+                    renderFieldRows(section);
+                    setTimeout(function () {
+                        var rows = document.getElementById(section + 'FieldsContainer').querySelectorAll('.dynamic-field-row');
+                        var lastInput = rows[rows.length - 1].querySelector('.field-label-input');
+                        if (lastInput) lastInput.focus();
+                    }, 50);
+                    triggerPreviewDebounced();
+                },
+                removeField: function (section, id) {
+                    state.fields[section] = state.fields[section].filter(function (f) { return f.id !== id; });
+                    renderFieldRows(section);
+                    triggerPreviewDebounced();
+                },
+                moveField: function (section, id, direction) {
+                    var arr = state.fields[section];
+                    var index = arr.findIndex(function (f) { return f.id === id; });
+                    if (index < 0) return;
+                    var newIndex = index + direction;
+                    if (newIndex < 0 || newIndex >= arr.length) return;
+
+                    // Swap
+                    var temp = arr[index];
+                    arr[index] = arr[newIndex];
+                    arr[newIndex] = temp;
+
+                    renderFieldRows(section);
+                    triggerPreviewDebounced();
+                },
+                loadProfile: function (profileId) {
+                    var data = predefinedProfiles[profileId] || predefinedProfiles['blank'];
+                    state.fields.personal = JSON.parse(JSON.stringify(data.personal));
+                    state.fields.family = JSON.parse(JSON.stringify(data.family));
+                    state.fields.contact = JSON.parse(JSON.stringify(data.contact));
+                    renderAllFields();
+                    renderPreview();
+                },
+                loadFromJson: function (e) {
+                    var file = e.target.files[0];
+                    if (!file) return;
+                    var reader = new FileReader();
+                    reader.onload = function (ev) {
+                        try {
+                            var data = JSON.parse(ev.target.result);
+
+                            // Merge into state safely
+                            if (data.fields) {
+                                state.fields = data.fields;
+                                if (data.template) state.template = data.template;
+                                if (data.topIcon) state.topIcon = data.topIcon;
+                                if (data.photoDataUrl !== undefined) state.photoDataUrl = data.photoDataUrl;
+                            } else if (data.personal || data.family || data.contact) {
+                                state.fields.personal = data.personal || [];
+                                state.fields.family = data.family || [];
+                                state.fields.contact = data.contact || [];
+                            } else {
+                                throw new Error("Invalid format");
+                            }
+
+                            // Sync UI
+                            document.querySelectorAll('.template-card').forEach(function (c) { c.classList.remove('active'); });
+                            var activeCard = document.querySelector('.template-card[data-template="' + state.template + '"]');
+                            if (activeCard) activeCard.classList.add('active');
+
+                            var iconRadio = document.querySelector('input[name="topIcon"][value="' + state.topIcon + '"]');
+                            if (iconRadio) iconRadio.checked = true;
+
+                            if (state.photoDataUrl) {
+                                document.getElementById('photoPreviewImg').src = state.photoDataUrl;
+                                document.getElementById('photoPreviewImg').style.display = 'block';
+                                document.getElementById('uploadPlaceholder').style.display = 'none';
+                                document.getElementById('removePhoto').style.display = 'flex';
+                            } else {
+                                document.getElementById('photoPreviewImg').style.display = 'none';
+                                document.getElementById('uploadPlaceholder').style.display = 'flex';
+                                document.getElementById('removePhoto').style.display = 'none';
+                            }
+
+                            renderAllFields();
+                            renderPreview();
+                        } catch (err) {
+                            alert('Invalid JSON format for bio-data.');
+                        }
+                    };
+                    reader.readAsText(file);
+                    e.target.value = ''; // Reset input
+                }
+            };
+        })();
+
+        document.addEventListener('DOMContentLoaded', app.init);
+    </script>
+</body>
+
+</html>
